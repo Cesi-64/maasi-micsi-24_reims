@@ -1,0 +1,27 @@
+services:
+  bdd-build:
+    container_name: bdd_build
+    image: mariadb:latest
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: TOOR
+      MARIADB_DATABASE: bddname
+      MARIADB_USER: roger
+      MARIADB_PASSWORD: regor
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+
+  backend-build:
+    container_name: backend_build
+    build: .
+    environment:
+      BDD_HOST: bdd_build
+    ports:
+      - 23000:23000
+    depends_on:
+      bdd-build:
+        condition: service_healthy
