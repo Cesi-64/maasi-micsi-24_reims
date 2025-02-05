@@ -10,7 +10,7 @@ on:
 
 jobs:
   HelloWorld:
-    runs-on: ubtuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Just hello world
