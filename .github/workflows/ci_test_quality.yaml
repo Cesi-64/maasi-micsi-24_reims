@@ -169,3 +169,11 @@ jobs:
           projectBaseDir: ./frontend
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
+
+  DockerBuild:
+    if: ${{ github.event_name == 'push' }}
+    permissions:
+      contents: read
+      packages: write
+    uses: ./.github/workflows/docker_ghcr.yaml
+    secrets: inherit
