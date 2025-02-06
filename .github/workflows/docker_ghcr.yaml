@@ -33,11 +33,11 @@ jobs:
         with:
           context: backend
           push: true
-          tags: ghcr.io/Cesi-64/setac-backend:latest
+          tags: ghcr.io/cesi-64/setac-backend:latest
 
       - name: Build and Push FRONTEND
         uses: docker/build-push-action@v4
         with:
           context: frontend
           push: true
-          tags: ghcr.io/Cesi-64/setac-frontend:latest
+          tags: ghcr.io/cesi-64/setac-frontend:latest
