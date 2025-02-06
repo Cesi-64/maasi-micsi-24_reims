@@ -170,24 +170,23 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
 
-  Runner:
-    if: ${{ github.event_name == 'push' }}
-    uses: ./.github/workflows/deploy_runner.yaml
+  # Runner:
+  #   if: ${{ github.event_name == 'push' }}
+  #   uses: ./.github/workflows/deploy_runner.yaml
   
   DockerBuild:
     if: ${{ github.event_name == 'push' }}
-    needs: [Runner]
     permissions:
       contents: read
       packages: write
     uses: ./.github/workflows/docker_ghcr.yaml
     secrets: inherit
 
-  
-
-
-  # Canary:
-  #   if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#canary')}}
+  Canary:
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#canary')}}
+    needs: [DockerBuild]
+    uses: ./.github/workflows/deploy_canary.yaml
+    secrets: inherit
 
   # Production:
   #   if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#prod')}}
