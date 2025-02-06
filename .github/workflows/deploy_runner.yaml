@@ -13,8 +13,8 @@ jobs:
 
       - name: Docker Compose Build
         run: |
-          docker compose -f docker-compose-global-build.yaml up -d
+          docker compose -f docker-compose-global-build.yaml up --build -d
 
       - name: Owasp Zap
         run: |
-          docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:23000
+          docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://10.1.0.4:23000
