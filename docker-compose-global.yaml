@@ -17,7 +17,7 @@ services:
 
   backend-build:
     container_name: backend_build
-    images: ghcr.io/cesi-64/setac-backend:latest
+    image: ghcr.io/cesi-64/setac-backend:latest
     environment:
       BDD_HOST: bdd_build
     ports:
